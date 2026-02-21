@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCT Live QR Pairing</title>
+    <style>
+        /* Screen eka pura dark background eka damma */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #0b141a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Iframe eka container ekak athule lassanata set kala */
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <iframe src="https://i-tct.com/pair/qr" id="tctFrame"></iframe>
+    </div>
+
+    <script>
+        // Samahara wita site eka block unoth refresh karanna meka udaw wenawa
+        setInterval(function() {
+            // Meeke auto-refresh danna puluwan, eth button eka click karanna ona nisa 
+            // meka nikanma thiyanna. Site eka athulema update eka wenawa.
+        }, 60000);
+    </script>
+
+</body>
+</html>
