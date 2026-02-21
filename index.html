@@ -3,48 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCT Live QR Pairing</title>
+    <title>TCT Pairing Card</title>
     <style>
-        /* Screen eka pura dark background eka damma */
-        body, html {
+        body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            background-color: #0b141a;
+            background-color: #0b141a; /* Screenshot eke dark background eka */
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* Iframe eka container ekak athule lassanata set kala */
-        .container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Iframe eka kotuwak athule hira karala card eka vitharak pennanawa */
+        .qr-wrapper {
+            width: 360px; /* Card eke palala */
+            height: 550px; /* Card eke usa */
+            overflow: hidden;
+            position: relative;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
+            width: 1200px; /* Original site eka lokuwata load karanawa */
+            height: 1000px;
+            position: absolute;
+            /* Card eka center karanna me values wenas karanna puluwan */
+            top: -150px; 
+            left: -420px;
             border: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <iframe src="https://i-tct.com/pair/qr" id="tctFrame"></iframe>
+    <div class="qr-wrapper">
+        <iframe src="https://i-tct.com/pair/qr" scrolling="no"></iframe>
     </div>
 
     <script>
-        // Samahara wita site eka block unoth refresh karanna meka udaw wenawa
+        // Vinadiyen vinadiya live update wenna refresh karanawa
         setInterval(function() {
-            // Meeke auto-refresh danna puluwan, eth button eka click karanna ona nisa 
-            // meka nikanma thiyanna. Site eka athulema update eka wenawa.
+            var frame = document.querySelector('iframe');
+            frame.src = frame.src;
         }, 60000);
     </script>
 
