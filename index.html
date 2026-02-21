@@ -2,54 +2,72 @@
 <html lang="si">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCT Pairing Card</title>
+    <title>TCT Live QR</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
-            background-color: #0b141a; /* Screenshot eke dark background eka */
+            background-color: #0b141a;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
         }
-
-        /* Iframe eka kotuwak athule hira karala card eka vitharak pennanawa */
-        .qr-wrapper {
-            width: 360px; /* Card eke palala */
-            height: 550px; /* Card eke usa */
-            overflow: hidden;
-            position: relative;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .card {
+            background-color: #111b21;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #222d34;
+            width: 320px;
         }
-
-        iframe {
-            width: 1200px; /* Original site eka lokuwata load karanawa */
-            height: 1000px;
-            position: absolute;
-            /* Card eka center karanna me values wenas karanna puluwan */
-            top: -150px; 
-            left: -420px;
+        .qr-container {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        img {
+            width: 100%;
+            display: block;
+        }
+        .btn {
+            background-color: #00a884;
+            color: #111b21;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
             border: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="qr-wrapper">
-        <iframe src="https://i-tct.com/pair/qr" scrolling="no"></iframe>
+<div class="card">
+    <h3 style="color: white; margin-top: 0;">TCT QR Pairing</h3>
+    
+    <div class="qr-container">
+        <img id="dynamicQR" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://i-tct.com/pair/qr" alt="QR Code">
     </div>
 
-    <script>
-        // Vinadiyen vinadiya live update wenna refresh karanawa
-        setInterval(function() {
-            var frame = document.querySelector('iframe');
-            frame.src = frame.src;
-        }, 60000);
-    </script>
+    <p style="color: #8696a0; font-size: 13px;">QR eka auto-update wenawa.</p>
+    <button class="btn" onclick="refreshQR()">REFRESH NOW</button>
+</div>
+
+<script>
+    function refreshQR() {
+        const qrImg = document.getElementById('dynamicQR');
+        // Timestamp ekak dala browser cache bypass karanawa
+        const newUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://i-tct.com/pair/qr&t=" + new Date().getTime();
+        qrImg.src = newUrl;
+    }
+
+    // Hama vinadiyakama update wenna
+    setInterval(refreshQR, 60000);
+</script>
 
 </body>
 </html>
